@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(48\\).toString\\('hex'\\)\\)\")",
+      "Bash(rm -rf .next && npm run build > /tmp/build12.log 2>&1; echo \"EXIT: $?\"; grep -E \"Compiled successfully|Failed|Type error|Error occurred|PageNotFound\" /tmp/build12.log | head; echo \"---routes---\"; grep -E \"sitemap|robots|/mod|/api/contact|opengraph\" /tmp/build12.log | head)",
+      "Read(//tmp/**)",
+      "Bash(cd /d/Anushka_Portfolio *)"
+    ]
+  }
+}

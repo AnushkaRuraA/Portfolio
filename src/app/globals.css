@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 255 255 255;
+  --foreground: 15 23 42;
+}
+
+.dark {
+  --background: 9 9 14;
+  --foreground: 226 232 240;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* offset for sticky navbar when anchor-scrolling */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .section {
+    @apply scroll-mt-20 py-20 sm:py-28;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-700 transition-colors hover:border-accent/40 hover:text-accent dark:border-white/10 dark:bg-white/5 dark:text-slate-300;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition-all hover:bg-accent-dark hover:shadow-accent/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition-all hover:border-accent hover:text-accent dark:border-white/15 dark:text-slate-200;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white/60 p-6 shadow-sm backdrop-blur transition-all dark:border-white/10 dark:bg-white/5;
+  }
+
+  .admin-input {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/30 dark:border-white/15 dark:bg-white/5 dark:text-slate-100;
+  }
+
+  .admin-label {
+    @apply mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-200;
+  }
+}
+
+/* Subtle animated gradient text for the hero name. */
+.gradient-text {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #6366f1);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gradient-text {
+    animation: gradient-pan 8s ease infinite;
+  }
+}
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Faint grid backdrop for the hero. */
+.hero-grid {
+  background-image: radial-gradient(
+    rgba(99, 102, 241, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
