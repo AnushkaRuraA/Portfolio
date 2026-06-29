@@ -13,7 +13,7 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
-export function Navbar({ name }: { name: string }) {
+export function Navbar({ name, photoUrl }: { name: string; photoUrl?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
@@ -66,9 +66,13 @@ export function Navbar({ name }: { name: string }) {
           href="#hero"
           className="flex items-center gap-2 font-bold tracking-tight"
         >
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent text-sm font-bold text-white">
-            {initials}
-          </span>
+          {photoUrl ? (
+            <img src={photoUrl} alt={name} className="h-9 w-9 rounded-xl object-cover" />
+          ) : (
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent text-sm font-bold text-white">
+              {initials}
+            </span>
+          )}
           <span className="hidden sm:inline">{name}</span>
         </a>
 

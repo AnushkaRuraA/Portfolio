@@ -18,7 +18,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Navbar name={profile.name} />
+      <Navbar name={profile.name} photoUrl={profile.photoUrl} />
       <main>
         <Hero profile={profile} />
         <About profile={profile} />

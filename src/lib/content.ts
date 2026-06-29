@@ -21,6 +21,7 @@ export interface SiteProfile {
   phone: string;
   about: string;
   resumeUrl: string;
+  photoUrl: string;
   social: { github: string; linkedin: string; email: string };
 }
 

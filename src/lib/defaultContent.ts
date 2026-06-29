@@ -15,6 +15,7 @@ export const defaultProfile = {
   about:
     "Full Stack Developer with 1+ year of production experience building scalable web applications with the MERN stack, Next.js, TypeScript, and Python/Django. I've independently delivered a live B2B platform, an e-commerce platform, and a Jira-style project management tool for an international client — owning each end to end from architecture through deployment. I'm strong with real-time systems (Socket.IO), cloud infrastructure (AWS EC2, S3, Nginx), and third-party API integrations.",
   resumeUrl: "/Anushka_Pandit_Resume.pdf",
+  photoUrl: "",
   social: {
     github: "https://github.com/anushk2026a",
     linkedin: "https://linkedin.com/in/anushka-pandit-rura",

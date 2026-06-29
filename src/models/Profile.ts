@@ -11,6 +11,7 @@ const profileSchema = new Schema(
     phone: { type: String, default: "" },
     about: { type: String, default: "" },
     resumeUrl: { type: String, default: "/resume.pdf" },
+    photoUrl: { type: String, default: "" },
     social: {
       github: { type: String, default: "" },
       linkedin: { type: String, default: "" },

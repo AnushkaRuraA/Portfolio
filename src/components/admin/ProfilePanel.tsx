@@ -14,6 +14,7 @@ interface ProfileForm {
   phone: string;
   about: string;
   resumeUrl: string;
+  photoUrl: string;
   social: { github: string; linkedin: string; email: string };
 }
 
@@ -26,6 +27,7 @@ const empty: ProfileForm = {
   phone: "",
   about: "",
   resumeUrl: "/resume.pdf",
+  photoUrl: "",
   social: { github: "", linkedin: "", email: "" },
 };
 
@@ -101,6 +103,21 @@ export function ProfilePanel() {
         </p>
       </div>
 
+      <div className="mt-4">
+        <TextInput
+          label="Profile Photo URL"
+          value={form.photoUrl}
+          onChange={set("photoUrl")}
+          placeholder="Upload an image or paste a URL"
+        />
+        <PhotoUpload onUploaded={(url) => set("photoUrl")(url)} />
+        {form.photoUrl && (
+          <div className="mt-2">
+            <img src={form.photoUrl} alt="Profile" className="h-16 w-16 rounded-xl object-cover" />
+          </div>
+        )}
+      </div>
+
       <h3 className="mt-6 mb-2 text-sm font-bold uppercase tracking-wider text-slate-500">
         Social links
       </h3>
@@ -168,6 +185,59 @@ function ResumeUpload({ onUploaded }: { onUploaded: (url: string) => void }) {
           <Upload size={16} />
         )}
         Upload PDF
+      </Button>
+    </div>
+  );
+}
+
+function PhotoUpload({ onUploaded }: { onUploaded: (url: string) => void }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      alert("Please choose an image file.");
+      return;
+    }
+    setUploading(true);
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("kind", "image");
+    const res = await withToast(
+      () =>
+        adminFetch<{ url: string }>("/api/admin/upload", {
+          method: "POST",
+          body: fd,
+        }),
+      { loading: "Uploading photo…", success: "Photo uploaded." }
+    );
+    if (res) onUploaded(res.url);
+    setUploading(false);
+    if (inputRef.current) inputRef.current.value = "";
+  }
+
+  return (
+    <div className="mt-2 flex items-center gap-2">
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        onChange={onFile}
+        className="hidden"
+      />
+      <Button
+        variant="ghost"
+        onClick={() => inputRef.current?.click()}
+        disabled={uploading}
+      >
+        {uploading ? (
+          <Loader2 size={16} className="animate-spin" />
+        ) : (
+          <Upload size={16} />
+        )}
+        Upload Photo
       </Button>
     </div>
   );

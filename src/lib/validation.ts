@@ -28,6 +28,7 @@ export const profileSchema = z.object({
   phone: z.string().trim().max(40).default(""),
   about: z.string().trim().max(3000).default(""),
   resumeUrl: z.string().trim().default(""),
+  photoUrl: z.string().trim().default(""),
   social: socialSchema,
 });
 
